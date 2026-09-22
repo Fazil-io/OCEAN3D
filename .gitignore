@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+dist/
+build/
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Large Datasets (>100MB exceeds GitHub push limit)
+dataset/
+*.nc
+*.tar.gz
+*.zip
+
+# Operating System & IDE
+.DS_Store
+.vscode/
+.idea/
+*.log
