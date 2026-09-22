@@ -15,7 +15,6 @@ venv/
 
 # Large Datasets (>100MB exceeds GitHub push limit)
 dataset/
-*.nc
 *.tar.gz
 *.zip
 

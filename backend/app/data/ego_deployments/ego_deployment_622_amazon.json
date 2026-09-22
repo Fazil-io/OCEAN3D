@@ -1,0 +1,81 @@
+{
+  "EGODeployment": [
+    {
+      "DEPLOYMENT_ID": 622,
+      "DEPLOYMENT_START_DATE": 20231205,
+      "SUMMARY_REPORT": "This campaign involves the deployment of three slocum gliders in the Weddell Sea and South Scotia Ridge region in December 2023 funded by NERC.",
+      "NAME": "Alex Brearley",
+      "ACTIVE": 1,
+      "CAMPAIGNNAME": "BIOPOLE",
+      "PROJNAME": "BIOPOLE",
+      "PLATFORMMODEL": [
+        {
+          "PLATFORM_MAKER": "Teledyne Webb Research",
+          "PLATFORM_TYPE": "slocum",
+          "MODEL_NAME": "G2"
+        }
+      ],
+      "PLATFORMINSTANCE": [
+        {
+          "PLATFORM_CODE": "Amazon",
+          "GLIDER_SERIAL_NO": "unit_223",
+          "GLIDER_OWNER": "BAS",
+          "WMO_PLATFORM_CODE": 6800980,
+          "PLATFORM_FAMILY": "open ocean glider"
+        }
+      ],
+      "SENSORLIST": [
+        {
+          "SENSORMODEL": [
+            {
+              "SENSOR_MODEL": "SBE Slocum Glider Payload (GPCTD) CTD",
+              "SENSOR_MAKER": "Sea-Bird Scientific"
+            }
+          ],
+          "PARAMETERLIST": [
+            {
+              "OG1_PARAMETER_URN": "TEMP",
+              "PREFLABEL": "Temperature"
+            },
+            {
+              "OG1_PARAMETER_URN": "PSAL",
+              "PREFLABEL": "Salinity"
+            }
+          ]
+        },
+        {
+          "SENSORMODEL": [
+            {
+              "SENSOR_MODEL": "Photosynthetically Active Radiation sensor",
+              "SENSOR_MAKER": "WET Labs"
+            }
+          ],
+          "PARAMETERLIST": [
+            {
+              "OG1_PARAMETER_URN": "DOWNWELLING_PAR",
+              "PREFLABEL": "PAR"
+            }
+          ]
+        },
+        {
+          "SENSORMODEL": [
+            {
+              "SENSOR_MODEL": "ECO Puck FLNTU-SLK fluorescence turbidity sensor",
+              "SENSOR_MAKER": "WET Labs"
+            }
+          ],
+          "PARAMETERLIST": [
+            {
+              "OG1_PARAMETER_URN": "CHLA",
+              "PREFLABEL": "Chlorophyll-A"
+            },
+            {
+              "OG1_PARAMETER_URN": "TURBIDITY",
+              "PREFLABEL": "Turbidity"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

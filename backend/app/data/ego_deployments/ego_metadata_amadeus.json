@@ -1,0 +1,46 @@
+{
+  "EGO_format_version": "1.4",
+  "global_attributes": {
+    "data_type": "EGO glider time-series data",
+    "platform_code": "amadeus",
+    "wmo_platform_code": "6801591",
+    "title": "MOSESII",
+    "summary": "Glider mission as part of MOSES II project, Meteor Cruise M160, Cabo Verde",
+    "institution": "HZG",
+    "principal_investigator": "Lucas Merckelbach",
+    "project_name": "MOSESII",
+    "area": "Cabo Verde, Atlantic Ocean",
+    "deployment_start_lat": 17.79,
+    "deployment_start_lon": -20.6
+  },
+  "glider_characteristics_data": [
+    {
+      "PLATFORM_TYPE": "SLOCUM_SG1",
+      "PLATFORM_MAKER": "WRC",
+      "GLIDER_SERIAL_NO": "158",
+      "GLIDER_OWNER": "HZG"
+    }
+  ],
+  "parametersList": [
+    {
+      "ego_variable_name": "TEMP",
+      "standard_name": "sea_water_temperature",
+      "units": "degree_Celsius"
+    },
+    {
+      "ego_variable_name": "PSAL",
+      "standard_name": "sea_water_salinity",
+      "units": "psu"
+    },
+    {
+      "ego_variable_name": "CHLA",
+      "standard_name": "mass_concentration_of_chlorophyll_a",
+      "units": "mg/m3"
+    },
+    {
+      "ego_variable_name": "TURBIDITY",
+      "standard_name": "sea_water_turbidity",
+      "units": "ntu"
+    }
+  ]
+}

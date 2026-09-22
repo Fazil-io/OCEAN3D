@@ -1,0 +1,12 @@
+{
+  "name": "sih26067-ocean-3d-platform",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "bash ./start.sh",
+    "start": "bash ./start.sh",
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload",
+    "build": "cd frontend && npm run build"
+  }
+}

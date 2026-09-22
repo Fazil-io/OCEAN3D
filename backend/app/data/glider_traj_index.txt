@@ -1,0 +1,5 @@
+# OceanGliders Trajectory Index File
+# Title: INCOIS / IFREMER Bay of Bengal Mission Trajectories
+# Format: platform_code,deployment_code,wmo_id,date_start,date_end,lat_start,lon_start,lat_end,lon_end,data_mode
+SG-INCOIS-04,BOB-2026-M1,2902891,20260901T000000Z,20260916T120000Z,13.52,84.20,15.10,87.45,D
+SLOCUM-G3-BOB,BOB-2026-M2,2902892,20260903T060000Z,20260916T103000Z,10.80,88.10,12.40,90.60,R

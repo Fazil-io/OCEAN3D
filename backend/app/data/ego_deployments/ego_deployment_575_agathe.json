@@ -1,0 +1,72 @@
+{
+  "EGODeployment": [
+    {
+      "DEPLOYMENT_ID": 575,
+      "DEPLOYMENT_START_DATE": 20220115,
+      "SUMMARY_REPORT": "This campaign involved the deployment of five seagliders in the Southern Ocean to investigate the Thwaites and Dotson Ice Shelves.",
+      "EMAIL": "k.heywood@uea.ac.uk",
+      "NAME": "Karen Heywood",
+      "ACTIVE": 0,
+      "CAMPAIGNNAME": "TARSAN",
+      "PROJNAME": "TARSAN",
+      "PLATFORMMODEL": [
+        {
+          "PLATFORM_MAKER": "Kongsberg Maritime",
+          "PLATFORM_TYPE": "seaglider",
+          "MODEL_NAME": "M1"
+        }
+      ],
+      "PLATFORMINSTANCE": [
+        {
+          "PLATFORM_CODE": "Agathe",
+          "GLIDER_SERIAL_NO": "sg127",
+          "GLIDER_OWNER": "UEA",
+          "WMO_PLATFORM_CODE": 6801558,
+          "PLATFORM_FAMILY": "open ocean glider"
+        }
+      ],
+      "SENSORLIST": [
+        {
+          "SENSORMODEL": [
+            {
+              "SENSOR_MODEL": "Unpumped CT sail CTD",
+              "SENSOR_MAKER": "Sea-Bird Scientific"
+            }
+          ],
+          "PARAMETERLIST": [
+            {
+              "OG1_PARAMETER_URN": "TEMP",
+              "PREFLABEL": "Temperature"
+            },
+            {
+              "OG1_PARAMETER_URN": "PSAL",
+              "PREFLABEL": "Salinity"
+            },
+            {
+              "OG1_PARAMETER_URN": "CNDC",
+              "PREFLABEL": "Conductivity"
+            }
+          ]
+        },
+        {
+          "SENSORMODEL": [
+            {
+              "SENSOR_MODEL": "Oxygen optode 4330",
+              "SENSOR_MAKER": "Aanderaa"
+            }
+          ],
+          "PARAMETERLIST": [
+            {
+              "OG1_PARAMETER_URN": "MOLAR_DOXY",
+              "PREFLABEL": "Dissolved Oxygen"
+            },
+            {
+              "OG1_PARAMETER_URN": "OXYSAT_DOXY",
+              "PREFLABEL": "Oxygen Saturation"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
