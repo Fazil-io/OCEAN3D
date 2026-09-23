@@ -33,7 +33,11 @@ export const AboutPage: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
             <div className={`p-3 rounded-lg border ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-              <span className="text-[10px] opacity-70">Team Lead</span>
+              <span className="text-[10px] opacity-70">Team Leader</span>
+              <p className="font-bold text-cyan-600 dark:text-cyan-400 text-sm mt-0.5">Shaila Neelofar K</p>
+            </div>
+            <div className={`p-3 rounded-lg border ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+              <span className="text-[10px] opacity-70">Technical Lead</span>
               <p className="font-bold text-cyan-600 dark:text-cyan-400 text-sm mt-0.5">Rifat N</p>
             </div>
             <div className={`p-3 rounded-lg border ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
@@ -43,6 +47,14 @@ export const AboutPage: React.FC = () => {
             <div className={`p-3 rounded-lg border ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
               <span className="text-[10px] opacity-70">Core Developer</span>
               <p className="font-bold text-cyan-600 dark:text-cyan-400 text-sm mt-0.5">Rohith S</p>
+            </div>
+            <div className={`p-3 rounded-lg border ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+              <span className="text-[10px] opacity-70">Core Developer</span>
+              <p className="font-bold text-cyan-600 dark:text-cyan-400 text-sm mt-0.5">Nishok Kumar R</p>
+            </div>
+            <div className={`p-3 rounded-lg border ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+              <span className="text-[10px] opacity-70">Core Developer</span>
+              <p className="font-bold text-cyan-600 dark:text-cyan-400 text-sm mt-0.5">Pravin Lenin Naidu</p>
             </div>
           </div>
         </div>

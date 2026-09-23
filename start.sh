@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "=========================================================="
 echo " Starting SIH 2026 Problem Statement SIH26067 Platform"
-echo " Team: CodeHydra (Rifat N, Mohammed Fazil S, Rohith S)"
+echo " Team: CodeHydra (Shaila Neelofar K, Rifat N, Mohammed Fazil S, Rohith S, Nishok Kumar R, Pravin Lenin Naidu)"
 echo "=========================================================="
 
 # 1. Start Python FastAPI backend

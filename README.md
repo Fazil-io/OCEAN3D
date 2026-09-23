@@ -3,9 +3,12 @@
 
 **Team Name:** BroCode  
 **Team Members:**
-- **Rifat N** (Team Lead)
+- **Shaila Neelofar K** (Team Leader)
+- **Rifat N** (Technical Lead)
 - **Mohammed Fazil S** (Full Stack & 3D WebGL)
 - **Rohith S** (Data Engineering & Analytics)
+- **Nishok Kumar R** (Backend & Analytics)
+- **Pravin Lenin Naidu** (UI/UX & Scientific Visualization)
 
 ---
 

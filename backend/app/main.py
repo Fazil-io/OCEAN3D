@@ -24,7 +24,7 @@ app.include_router(router)
 def root():
     return {
         "message": "SIH 2026 Problem Statement SIH26067: 3D Ocean Model & Observation Platform",
-        "team": "CodeHydra (Rifat N, Mohammed Fazil S, Rohith S)",
+        "team": "CodeHydra (Shaila Neelofar K, Rifat N, Mohammed Fazil S, Rohith S, Nishok Kumar R, Pravin Lenin Naidu)",
         "docs": "/docs",
         "status": "operational"
     }
