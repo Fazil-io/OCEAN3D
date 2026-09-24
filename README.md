@@ -1,14 +1,14 @@
 # SIH 2026 Problem Statement SIH26067
 ## Web-Based Interactive 3D Visualization Platform for Numerical Ocean Models and In-Situ Observations
 
-**Team Name:** BroCode  
+**Team Name:** CodeHydra  
 **Team Members:**
 - **Shaila Neelofar K** (Team Leader)
-- **Rifat N** (Technical Lead)
-- **Mohammed Fazil S** (Full Stack & 3D WebGL)
-- **Rohith S** (Data Engineering & Analytics)
-- **Nishok Kumar R** (Backend & Analytics)
-- **Pravin Lenin Naidu** (UI/UX & Scientific Visualization)
+- **Rifat N** (Pitch Deck & Presentation)
+- **Mohammed Fazil S** (Prototype Development)
+- **Rohith S** (Case Study & Video Docs)
+- **Nishok Kumar R** (Prototype Development)
+- **Pravin Lenin Naidu** (Pitch Deck & Presentation)
 
 ---
 

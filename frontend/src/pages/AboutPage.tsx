@@ -37,23 +37,23 @@ export const AboutPage: React.FC = () => {
               <p className="font-bold text-cyan-600 dark:text-cyan-400 text-sm mt-0.5">Shaila Neelofar K</p>
             </div>
             <div className={`p-3 rounded-lg border ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-              <span className="text-[10px] opacity-70">Technical Lead</span>
+              <span className="text-[10px] opacity-70">Pitch Deck & Presentation</span>
               <p className="font-bold text-cyan-600 dark:text-cyan-400 text-sm mt-0.5">Rifat N</p>
             </div>
             <div className={`p-3 rounded-lg border ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-              <span className="text-[10px] opacity-70">Core Developer</span>
+              <span className="text-[10px] opacity-70">Prototype Development</span>
               <p className="font-bold text-cyan-600 dark:text-cyan-400 text-sm mt-0.5">Mohammed Fazil S</p>
             </div>
             <div className={`p-3 rounded-lg border ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-              <span className="text-[10px] opacity-70">Core Developer</span>
+              <span className="text-[10px] opacity-70">Case Study & Video Docs</span>
               <p className="font-bold text-cyan-600 dark:text-cyan-400 text-sm mt-0.5">Rohith S</p>
             </div>
             <div className={`p-3 rounded-lg border ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-              <span className="text-[10px] opacity-70">Core Developer</span>
+              <span className="text-[10px] opacity-70">Prototype Development</span>
               <p className="font-bold text-cyan-600 dark:text-cyan-400 text-sm mt-0.5">Nishok Kumar R</p>
             </div>
             <div className={`p-3 rounded-lg border ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-              <span className="text-[10px] opacity-70">Core Developer</span>
+              <span className="text-[10px] opacity-70">Pitch Deck & Presentation</span>
               <p className="font-bold text-cyan-600 dark:text-cyan-400 text-sm mt-0.5">Pravin Lenin Naidu</p>
             </div>
           </div>
