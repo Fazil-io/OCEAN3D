@@ -14,9 +14,16 @@ interface ObservationMarkersProps {
 }
 
 function latLonDepthTo3D(lat: number, lon: number, depth: number): [number, number, number] {
-  const z = 13.0 - ((lat - 6.0) / 15.0) * 26.0;
-  const x = -13.0 + ((lon - 80.0) / 14.0) * 26.0;
-  const y = 8.0 - (depth / 1500.0) * 16.0;
+  // Domain boundaries: Lon [80°E, 94°E], Lat [6°N, 21°N], Depth [0m, 1500m]
+  // Constrain coordinates safely within the 3D bounding box (box spans: X: [-13, 13], Y: [-8, 8], Z: [-13, 13])
+  const safeLat = Math.max(6.2, Math.min(20.8, lat));
+  const safeLon = Math.max(80.2, Math.min(93.8, lon));
+  const safeDepth = Math.max(0.0, Math.min(1450.0, depth));
+
+  const z = 12.5 - ((safeLat - 6.0) / 15.0) * 25.0;
+  const x = -12.5 + ((safeLon - 80.0) / 14.0) * 25.0;
+  // y ranges from +7.6 (surface) down to -7.2 (near bottom seabed), NEVER below the -8.0 floor
+  const y = 7.6 - (safeDepth / 1500.0) * 14.8;
   return [x, y, z];
 }
 
@@ -40,10 +47,12 @@ export const ObservationMarkers: React.FC<ObservationMarkersProps> = ({
 
   return (
     <group>
-      {/* 1. Argo Floats Buoys */}
+      {/* 1. Argo Floats Buoys & Vertical In-Situ Profiles */}
       {observations.map((obs) => {
         const [x, y, z] = latLonDepthTo3D(obs.latitude, obs.longitude, obs.current_depth);
         const isSelected = selectedItem?.id === obs.id;
+        // Profile depth down to seabed within the box (seabed at y = -7.4)
+        const profileDepthY = -(y + 7.4);
 
         return (
           <group
@@ -54,33 +63,60 @@ export const ObservationMarkers: React.FC<ObservationMarkersProps> = ({
               onSelectItem(isSelected ? null : obs);
             }}
           >
-            {/* Argo Float Top Buoy Sphere */}
+            {/* Argo Float Surface Buoy Sphere */}
             <mesh>
-              <sphereGeometry args={[isSelected ? 0.7 : 0.45, 16, 16]} />
+              <sphereGeometry args={[isSelected ? 0.65 : 0.42, 16, 16]} />
               <meshStandardMaterial
                 color={isSelected ? '#00f0ff' : '#f59e0b'}
                 emissive={isSelected ? '#00f0ff' : '#d97706'}
-                emissiveIntensity={isSelected ? 0.8 : 0.3}
+                emissiveIntensity={isSelected ? 0.8 : 0.35}
                 roughness={0.2}
               />
             </mesh>
 
-            {/* Depth Tether Cable Down into Abyss */}
+            {/* Satellite Uplink Antenna Mast */}
+            <mesh position={[0, 0.42, 0]}>
+              <cylinderGeometry args={[0.03, 0.03, 0.45, 6]} />
+              <meshStandardMaterial color={isSelected ? '#00f0ff' : '#94a3b8'} />
+            </mesh>
+            <mesh position={[0, 0.68, 0]}>
+              <sphereGeometry args={[0.07, 8, 8]} />
+              <meshStandardMaterial
+                color={isSelected ? '#00f0ff' : '#ef4444'}
+                emissive={isSelected ? '#00f0ff' : '#ef4444'}
+                emissiveIntensity={0.9}
+              />
+            </mesh>
+
+            {/* Vertical CTD Profile Cast Line - strictly inside the 3D model box */}
             <line>
               <bufferGeometry
                 attach="geometry"
                 {...new THREE.BufferGeometry().setFromPoints([
                   new THREE.Vector3(0, 0, 0),
-                  new THREE.Vector3(0, -10, 0)
+                  new THREE.Vector3(0, profileDepthY, 0)
                 ])}
               />
-              <lineBasicMaterial color={isSelected ? '#00f0ff' : '#f59e0b'} transparent opacity={0.5} />
+              <lineBasicMaterial
+                color={isSelected ? '#00f0ff' : '#f59e0b'}
+                transparent
+                opacity={isSelected ? 0.85 : 0.45}
+              />
             </line>
 
-            {/* Floating Label */}
+            {/* Subsurface CTD Sensor Package at base of cast */}
+            <mesh position={[0, profileDepthY, 0]}>
+              <cylinderGeometry args={[0.16, 0.16, 0.38, 8]} />
+              <meshStandardMaterial
+                color={isSelected ? '#00f0ff' : '#d97706'}
+                roughness={0.3}
+              />
+            </mesh>
+
+            {/* Floating Platform Identifier */}
             <Text
-              position={[0, 0.9, 0]}
-              fontSize={0.45}
+              position={[0, 0.95, 0]}
+              fontSize={0.42}
               color={isSelected ? '#00f0ff' : isDark ? '#ffffff' : '#0f172a'}
               anchorX="center"
               anchorY="bottom"

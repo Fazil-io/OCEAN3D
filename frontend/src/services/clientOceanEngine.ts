@@ -486,7 +486,9 @@ export const clientOceanEngine = {
       latitude: rec.latitude,
       longitude: rec.longitude,
       timestamp: rec.date,
-      current_depth: rec.pressure_max || 1000.0,
+      current_depth: (rec.profiles && rec.profiles.length > 0 && typeof rec.profiles[0].depth === 'number')
+        ? rec.profiles[0].depth
+        : 6.0,
       variables: {
         temperature: rec.surface_temp,
         salinity: rec.surface_sal,
