@@ -607,22 +607,23 @@ export const InSitu3DViewer: React.FC<InSitu3DViewerProps> = ({
       isDark ? "bg-[#020713] border-cyan-500/30 text-white" : "bg-white border-slate-300 text-slate-900"
     }`}>
       {/* ── LEFT: 3D VIEWPORT CANVAS ───────────────────────── */}
-      <div className="flex-1 h-[55vh] lg:h-full relative overflow-hidden">
-        {/* Model Selector Tabs (Argo, Buoy, Glider) */}
-        <div className="absolute top-3 left-3 z-10 flex flex-wrap items-center gap-1.5 p-1 rounded-xl border backdrop-blur-md bg-slate-950/80 border-cyan-500/30 shadow-lg">
+      <div className="flex-1 h-[45vh] sm:h-[52vh] lg:h-full relative overflow-hidden">
+        {/* Model Selector Tabs (Responsive on Mobile/Tablet) */}
+        <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10 flex items-center gap-1 p-1 rounded-xl border backdrop-blur-md bg-slate-950/85 border-cyan-500/30 shadow-lg max-w-[calc(100vw-120px)] sm:max-w-none overflow-x-auto no-scrollbar">
           <button
             onClick={() => {
               setActiveModel("argo");
               setHighlightedSensor(null);
             }}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-mono font-bold transition-all whitespace-nowrap cursor-pointer ${
               activeModel === "argo"
                 ? "bg-amber-500 text-slate-950 shadow-md font-extrabold"
                 : "text-slate-300 hover:text-white hover:bg-white/10"
             }`}
           >
             <span className="w-2 h-2 rounded-full bg-amber-400" />
-            <span>Argo Profiling Float</span>
+            <span className="hidden sm:inline">Argo Profiling Float</span>
+            <span className="sm:hidden">Argo Float</span>
           </button>
 
           <button
@@ -630,14 +631,15 @@ export const InSitu3DViewer: React.FC<InSitu3DViewerProps> = ({
               setActiveModel("buoy");
               setHighlightedSensor(null);
             }}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-mono font-bold transition-all whitespace-nowrap cursor-pointer ${
               activeModel === "buoy"
                 ? "bg-cyan-500 text-slate-950 shadow-md font-extrabold"
                 : "text-slate-300 hover:text-white hover:bg-white/10"
             }`}
           >
             <span className="w-2 h-2 rounded-full bg-cyan-400" />
-            <span>Met-Ocean Moored Buoy</span>
+            <span className="hidden sm:inline">Met-Ocean Moored Buoy</span>
+            <span className="sm:hidden">Ocean Buoy</span>
           </button>
 
           <button
@@ -645,43 +647,46 @@ export const InSitu3DViewer: React.FC<InSitu3DViewerProps> = ({
               setActiveModel("glider");
               setHighlightedSensor(null);
             }}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-mono font-bold transition-all whitespace-nowrap cursor-pointer ${
               activeModel === "glider"
                 ? "bg-emerald-500 text-slate-950 shadow-md font-extrabold"
                 : "text-slate-300 hover:text-white hover:bg-white/10"
             }`}
           >
             <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span>OceanGlider (AUV)</span>
+            <span className="hidden sm:inline">OceanGlider (AUV)</span>
+            <span className="sm:hidden">Glider</span>
           </button>
         </div>
 
-        {/* Top-Right Quick Toggles (Wireframe, Auto-Rotate) */}
-        <div className="absolute top-3 right-3 z-10 flex items-center gap-2">
+        {/* Top-Right Quick Toggles (Mobile Responsive) */}
+        <div className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10 flex items-center gap-1 sm:gap-2">
           <button
             onClick={() => setWireframe(!wireframe)}
             title="Toggle X-Ray / Technical Wireframe Mode"
-            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg border text-xs font-mono font-semibold backdrop-blur-md transition-all cursor-pointer ${
+            className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border text-[11px] sm:text-xs font-mono font-semibold backdrop-blur-md transition-all cursor-pointer ${
               wireframe
                 ? "bg-cyan-500 text-slate-950 border-cyan-400 font-bold shadow-md shadow-cyan-500/20"
                 : "bg-slate-950/80 border-slate-700 text-slate-300 hover:text-white"
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
-            <span>{wireframe ? "Solid Mesh" : "X-Ray Wireframe"}</span>
+            <span className="hidden sm:inline">{wireframe ? "Solid Mesh" : "X-Ray Wireframe"}</span>
+            <span className="sm:hidden">{wireframe ? "Solid" : "X-Ray"}</span>
           </button>
 
           <button
             onClick={() => setAutoRotate(!autoRotate)}
             title="Toggle 360° Auto Rotation"
-            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg border text-xs font-mono font-semibold backdrop-blur-md transition-all cursor-pointer ${
+            className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border text-[11px] sm:text-xs font-mono font-semibold backdrop-blur-md transition-all cursor-pointer ${
               autoRotate
                 ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
                 : "bg-slate-950/80 border-slate-700 text-slate-400 hover:text-white"
             }`}
           >
             <RotateCcw className={`w-3.5 h-3.5 ${autoRotate ? "animate-spin-slow" : ""}`} />
-            <span>{autoRotate ? "Orbiting" : "Static"}</span>
+            <span className="hidden sm:inline">{autoRotate ? "Orbiting" : "Static"}</span>
+            <span className="sm:hidden">{autoRotate ? "Orbit" : "Static"}</span>
           </button>
         </div>
 
@@ -732,15 +737,15 @@ export const InSitu3DViewer: React.FC<InSitu3DViewerProps> = ({
           />
         </Canvas>
 
-        {/* Bottom Floating Control Hint */}
-        <div className="absolute bottom-3 left-3 z-10 flex items-center gap-2 text-[11px] font-mono text-slate-400 bg-slate-950/70 px-3 py-1 rounded-lg border border-white/10 backdrop-blur-md">
-          <Compass className="w-3.5 h-3.5 text-cyan-400 animate-spin-slow" />
-          <span>Interactive 3D Digital Twin • Drag to Rotate • Scroll to Zoom</span>
+        {/* Bottom Floating Control Hint (Responsive) */}
+        <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 z-10 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-mono text-slate-400 bg-slate-950/80 px-2.5 sm:px-3 py-1 rounded-lg border border-white/10 backdrop-blur-md max-w-[92vw] truncate">
+          <Compass className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0 animate-spin-slow" />
+          <span className="truncate">Drag to Rotate • Pinch/Scroll to Zoom</span>
         </div>
       </div>
 
       {/* ── RIGHT: TECHNICAL SPECIFICATIONS & SENSOR HOTSPOTS ─ */}
-      <div className={`w-full lg:w-[420px] p-5 border-t lg:border-t-0 lg:border-l overflow-y-auto space-y-4 font-mono transition-colors ${
+      <div className={`w-full lg:w-[420px] p-3 sm:p-5 border-t lg:border-t-0 lg:border-l overflow-y-auto space-y-3 sm:space-y-4 font-mono transition-colors ${
         isDark ? "bg-[#040c1d] border-cyan-500/25" : "bg-slate-50 border-slate-200"
       }`}>
         {/* Title Header */}

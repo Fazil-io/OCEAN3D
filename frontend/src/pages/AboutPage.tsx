@@ -7,7 +7,7 @@ export const AboutPage: React.FC = () => {
   const isDark = theme === 'dark';
 
   return (
-    <div className={`flex-1 w-full h-[calc(100vh-3.5rem)] overflow-y-auto p-6 sm:p-12 space-y-8 transition-colors ${
+    <div className={`flex-1 w-full h-full min-h-0 overflow-y-auto p-4 sm:p-8 md:p-12 space-y-6 sm:space-y-8 transition-colors ${
       isDark ? 'bg-[#030711] text-slate-100' : 'bg-slate-100 text-slate-800'
     }`}>
       <div className="max-w-4xl mx-auto space-y-8">
@@ -31,7 +31,7 @@ export const AboutPage: React.FC = () => {
             <h2 className="text-base font-bold font-mono">Team CodeHydra</h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 text-xs font-mono">
             <div className={`p-3 rounded-lg border ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
               <span className="text-[10px] opacity-70">Team Leader</span>
               <p className="font-bold text-cyan-600 dark:text-cyan-400 text-sm mt-0.5">Shaila Neelofar K</p>
@@ -68,7 +68,7 @@ export const AboutPage: React.FC = () => {
             <h2 className="text-base font-bold font-mono">Technology Architecture</h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 text-xs font-mono">
             <div className={`p-4 rounded-xl border space-y-2 ${isDark ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
               <h3 className="font-bold text-cyan-500">Frontend Stack</h3>
               <ul className="space-y-1 opacity-80">

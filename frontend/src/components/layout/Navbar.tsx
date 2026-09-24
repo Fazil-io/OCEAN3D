@@ -60,7 +60,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     >
       {/* 1. TOP SUB-TIER: Auxiliary links, project metadata & utilities in Blend style matched to Ocean theme */}
       <div
-        className={`px-4 sm:px-8 py-1.5 flex items-center justify-between text-[12px] border-b transition-colors ${
+        className={`px-3 sm:px-8 py-1 sm:py-1.5 flex items-center justify-between text-[11px] sm:text-[12px] border-b transition-colors ${
           isDark
             ? "border-white/[0.08] bg-[#070f22]/70 text-slate-400"
             : "border-slate-100 bg-slate-50/90 text-slate-500"
@@ -95,7 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <>
                 <span className="opacity-40">•</span>
                 <span className={`hidden md:inline ${isDark ? "text-slate-400" : "text-slate-500"}`}>
-                  INCOIS NetCDF & 118 Gliders Active
+                  INCOIS NetCDF & 1,116 Gliders Active
                 </span>
               </>
             )}
@@ -168,7 +168,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* 2. MAIN TIER: Brand Logo, Nav Elements & Cyan Ocean CTA Button */}
-      <div className="px-4 sm:px-8 py-3.5 flex items-center justify-between">
+      <div className="px-3 sm:px-8 py-2 sm:py-3.5 flex items-center justify-between">
         {/* Brand: Ocean3D with matching website cyan theme */}
         <div className="flex items-center gap-3">
           <button
@@ -262,7 +262,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onToggleFullscreen}
               title={isFullscreen ? "Exit Full Screen" : "Full Screen 3D Visualization"}
-              className={`group relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-md font-bold text-[13px] sm:text-[14px] transition-all duration-200 cursor-pointer ${
+              className={`group relative hidden sm:inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-md font-bold text-xs sm:text-[14px] transition-all duration-200 cursor-pointer ${
                 isDark
                   ? "bg-cyan-400 text-[#030711] shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:bg-[#38bdf8] hover:shadow-[0_0_28px_rgba(0,240,255,0.6)] hover:scale-[1.02] active:scale-[0.98]"
                   : "bg-gradient-to-r from-sky-600 to-cyan-500 text-white shadow-md shadow-cyan-500/25 hover:from-sky-500 hover:to-cyan-400 hover:scale-[1.02] active:scale-[0.98]"
@@ -283,7 +283,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           ) : (
             <button
               onClick={() => handleTabClick("explorer")}
-              className={`group relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-md font-bold text-[13px] sm:text-[14px] transition-all duration-200 cursor-pointer ${
+              className={`group relative hidden sm:inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-md font-bold text-xs sm:text-[14px] transition-all duration-200 cursor-pointer ${
                 isDark
                   ? "bg-cyan-400 text-[#030711] shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:bg-[#38bdf8] hover:shadow-[0_0_28px_rgba(0,240,255,0.6)] hover:scale-[1.02] active:scale-[0.98]"
                   : "bg-gradient-to-r from-sky-600 to-cyan-500 text-white shadow-md shadow-cyan-500/25 hover:from-sky-500 hover:to-cyan-400 hover:scale-[1.02] active:scale-[0.98]"
@@ -312,10 +312,19 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* 3. MOBILE MENU (Drawer in matching Ocean theme color) */}
       {mobileMenuOpen && (
         <div
-          className={`lg:hidden border-t px-4 py-4 space-y-2 animate-in fade-in duration-150 ${
+          className={`lg:hidden border-t px-4 py-4 space-y-3 animate-in fade-in duration-150 ${
             isDark ? "border-white/10 bg-[#030711]" : "border-slate-200 bg-white"
           }`}
         >
+          {/* Quick Launch CTA for Mobile */}
+          <button
+            onClick={() => handleTabClick("explorer")}
+            className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-sky-600 via-cyan-500 to-teal-400 text-slate-950 font-bold text-sm flex items-center justify-center gap-2 shadow-md shadow-cyan-500/20 active:scale-[0.98] transition-all cursor-pointer font-mono"
+          >
+            <Waves className="w-4 h-4 text-slate-950" />
+            <span>Launch 3D Explorer</span>
+          </button>
+
           <div className="space-y-1">
             {navItems.map((item) => {
               const Icon = item.icon;

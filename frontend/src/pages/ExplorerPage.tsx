@@ -258,111 +258,71 @@ export const ExplorerPage: React.FC<ExplorerPageProps> = ({
           lowBandwidth={lowBandwidth}
         />
 
-        {/* ── Location Analysis & Telemetry Display Gadget ── */}
-        <LocationDisplayGadget
-          isDark={isDark}
-          onTargetIn3D={handleTargetLocation}
-        />
-
-        {/* ── Top-Left: Mode Selector ─────────────────── */}
-        <div className={`absolute top-3 left-3 flex items-center gap-1 p-1 rounded-xl border backdrop-blur-md z-10 ${panel}`}>
+        {/* ── Top-Left: Mode Selector (Clean & Uncrowded) ── */}
+        <div className={`absolute top-2.5 sm:top-3 left-2 sm:left-3 flex items-center gap-1 p-1 rounded-xl border backdrop-blur-md z-10 shadow-sm ${panel}`}>
           {MODES.map((m) => (
             <button
               key={m.id}
               onClick={() => setVisMode(m.id)}
-              className={`px-3 py-1.5 ${btnBase} ${visMode === m.id ? btnActive : btnIdle}`}
+              className={`px-2.5 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-xs font-semibold whitespace-nowrap ${btnBase} ${visMode === m.id ? btnActive : btnIdle}`}
             >
-              {m.label}
+              <span className="sm:hidden">{m.id === 'slice' ? 'Slice' : m.id === 'volume' ? 'Volume' : m.id === 'currents' ? 'Flow' : 'In-Situ'}</span>
+              <span className="hidden sm:inline">{m.label}</span>
             </button>
           ))}
         </div>
 
-        {/* ── Top-Right: Quick Actions ────────────────── */}
-        <div className="absolute top-3 right-3 flex items-center gap-2 z-10">
-          <button
-            onClick={() => setAutoContrast(!autoContrast)}
-            title="Toggle Auto-Contrast"
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold backdrop-blur-md transition-all ${
-              autoContrast
-                ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50'
-                : isDark
-                  ? 'bg-slate-950/85 border-slate-800 text-slate-400'
-                  : 'bg-white/95 border-slate-300 text-slate-600'
-            }`}
-          >
-            <Contrast className="w-3.5 h-3.5" />
-            <span>{autoContrast ? 'Auto-Contrast' : 'Manual Scale'}</span>
-          </button>
+        {/* ── Location Option with Controls & Full Screen below it ── */}
+        <LocationDisplayGadget
+          isDark={isDark}
+          onTargetIn3D={handleTargetLocation}
+        >
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-1">
+            {/* Scientific Controls Toggle Option */}
+            <button
+              onClick={() => setShowControlsDrawer((prev) => !prev)}
+              title={showControlsDrawer ? "Hide Scientific Controls" : "Show Scientific Controls"}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono font-bold backdrop-blur-md transition-all shadow-md cursor-pointer ${
+                showControlsDrawer
+                  ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-cyan-500/30 font-extrabold'
+                  : isDark
+                  ? 'bg-[#030914]/90 border-cyan-500/40 text-cyan-300 hover:border-cyan-300 hover:bg-[#071329]'
+                  : 'bg-white/95 border-sky-300 text-sky-700 hover:border-sky-500 hover:bg-slate-50'
+              }`}
+            >
+              <Sliders className="w-3.5 h-3.5 text-cyan-400" />
+              <span>{showControlsDrawer ? 'Close Controls' : 'Scientific Controls'}</span>
+            </button>
 
-          <button
-            onClick={handleExportSnapshot}
-            title="Save PNG Snapshot"
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold backdrop-blur-md transition-all ${
-              isDark ? 'bg-slate-950/85 border-slate-800 text-slate-200 hover:bg-slate-800' : 'bg-white/95 border-slate-300 text-slate-800 hover:bg-slate-100'
-            }`}
-          >
-            <Camera className="w-3.5 h-3.5 text-cyan-500" />
-            <span>Snapshot</span>
-          </button>
-
-          <button
-            onClick={handleExportCSV}
-            title="Export CSV Data"
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold backdrop-blur-md transition-all ${
-              isDark ? 'bg-slate-950/85 border-slate-800 text-slate-200 hover:bg-slate-800' : 'bg-white/95 border-slate-300 text-slate-800 hover:bg-slate-100'
-            }`}
-          >
-            <Download className="w-3.5 h-3.5 text-emerald-500" />
-            <span>CSV</span>
-          </button>
-
-          {/* Fullscreen Mode Controls & Toggle */}
-          {isFullscreen ? (
-            <>
-              <button
-                onClick={() => setShowControlsDrawer(!showControlsDrawer)}
-                title="Toggle Controls Panel"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold backdrop-blur-md transition-all ${
-                  showControlsDrawer
-                    ? 'bg-cyan-500 text-white border-cyan-400 shadow-md shadow-cyan-500/20'
-                    : isDark
-                      ? 'bg-slate-950/85 border-slate-800 text-cyan-300 hover:bg-slate-800'
-                      : 'bg-white/95 border-slate-300 text-cyan-700 hover:bg-slate-100'
-                }`}
-              >
-                <Sliders className="w-3.5 h-3.5" />
-                <span>{showControlsDrawer ? 'Close Panel' : 'Controls'}</span>
-              </button>
-
-              {onToggleFullscreen && (
-                <button
-                  onClick={onToggleFullscreen}
-                  title="Exit Fullscreen Visualization"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold backdrop-blur-md bg-cyan-500/20 text-cyan-300 border-cyan-500/40 hover:bg-cyan-500/30 transition-all"
-                >
-                  <Minimize2 className="w-3.5 h-3.5" />
-                  <span>Exit Fullscreen</span>
-                </button>
-              )}
-            </>
-          ) : (
-            onToggleFullscreen && (
+            {/* Full Screen Option */}
+            {onToggleFullscreen && (
               <button
                 onClick={onToggleFullscreen}
-                title="Expand 3D Viewport to Full Screen (Header stays visible)"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold backdrop-blur-md transition-all ${
-                  isDark ? 'bg-slate-950/85 border-slate-800 text-cyan-300 hover:bg-slate-800' : 'bg-white/95 border-slate-300 text-cyan-700 hover:bg-slate-100'
+                title={isFullscreen ? "Exit Fullscreen" : "Full Screen 3D Visualization"}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono font-semibold backdrop-blur-md transition-all shadow-md cursor-pointer ${
+                  isDark
+                    ? 'bg-slate-950/85 border-slate-800 text-slate-200 hover:text-white hover:bg-slate-800'
+                    : 'bg-white/95 border-slate-300 text-slate-800 hover:bg-slate-100 shadow-sm'
                 }`}
               >
-                <Maximize2 className="w-3.5 h-3.5 text-cyan-500" />
-                <span>Fullscreen</span>
+                {isFullscreen ? (
+                  <>
+                    <Minimize2 className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Exit Fullscreen</span>
+                  </>
+                ) : (
+                  <>
+                    <Maximize2 className="w-3.5 h-3.5 text-cyan-500" />
+                    <span>Full Screen</span>
+                  </>
+                )}
               </button>
-            )
-          )}
-        </div>
+            )}
+          </div>
+        </LocationDisplayGadget>
 
-        {/* ── Bottom-Left: Colorbar ───────────────────── */}
-        <div className="absolute bottom-16 left-4 z-10 w-64">
+        {/* ── Bottom-Left: Colorbar (Compact on mobile) ── */}
+        <div className="absolute bottom-14 sm:bottom-16 left-2 sm:left-4 z-10 w-36 sm:w-56 md:w-64 max-w-[45vw]">
           <Colorbar
             variable={currentVar?.label || variable}
             units={currentVar?.unit || metadata?.variables[variable]?.units || ''}
@@ -372,14 +332,16 @@ export const ExplorerPage: React.FC<ExplorerPageProps> = ({
           />
         </div>
 
-        {/* ── Bottom-Center: Camera Presets ──────────── */}
-        <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1 px-2 py-1.5 rounded-xl border backdrop-blur-md z-10 ${panel}`}>
-          <span className="text-[11px] font-bold opacity-60 pr-1">Camera:</span>
+
+
+        {/* ── Bottom-Center: Camera Presets (Touch friendly on mobile) ── */}
+        <div className={`absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-1 sm:py-1.5 rounded-xl border backdrop-blur-md z-10 max-w-[95vw] shadow-sm ${panel}`}>
+          <span className="text-[10px] sm:text-[11px] font-bold opacity-60 pr-1 hidden xs:inline">Camera:</span>
           {CAMERA_PRESETS.map((c) => (
             <button
               key={c.id}
               onClick={() => setCameraPreset(c.id)}
-              className={`px-2.5 py-1 ${btnBase} ${cameraPreset === c.id ? btnActive : btnIdle}`}
+              className={`px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-xs ${btnBase} ${cameraPreset === c.id ? btnActive : btnIdle}`}
             >
               {c.label}
             </button>
@@ -387,40 +349,76 @@ export const ExplorerPage: React.FC<ExplorerPageProps> = ({
         </div>
       </div>
 
-      {/* ══════════════════ RIGHT CONTROL PANEL ══════════════════ */}
-      {(!isFullscreen || showControlsDrawer) && (
+      {/* ── Backdrop for Scientific Controls Drawer ── */}
+      {showControlsDrawer && (
+        <div
+          onClick={() => setShowControlsDrawer(false)}
+          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-30 transition-opacity"
+        />
+      )}
+
+      {/* ══════════════════ SCIENTIFIC CONTROLS SLIDE-OVER DRAWER ══════════════════ */}
+      {showControlsDrawer && (
         <aside
-          className={
-            isFullscreen
-              ? `fixed top-14 right-0 bottom-0 w-80 sm:w-96 border-l shadow-2xl flex flex-col z-40 backdrop-blur-xl transition-all duration-200 ${
-                  isDark ? 'border-slate-800 bg-slate-950/95 text-slate-100' : 'border-slate-200 bg-white/95 text-slate-900'
-                }`
-              : `w-80 border-l flex flex-col h-full overflow-y-auto z-20 transition-colors flex-shrink-0 ${panel}`
-          }
+          className={`fixed top-0 sm:top-14 right-0 bottom-0 w-[88vw] sm:w-96 max-w-full z-40 shadow-2xl flex flex-col backdrop-blur-xl border-l animate-in slide-in-from-right duration-200 ${
+            isDark ? 'border-cyan-500/30 bg-[#050d1c]/98 text-slate-100 shadow-[0_0_40px_rgba(0,0,0,0.8)]' : 'border-slate-300 bg-white/98 text-slate-900 shadow-xl'
+          }`}
         >
-          {/* Panel Header */}
+          {/* Panel Header with Close Button */}
           <div className={`px-4 py-3 border-b flex items-center justify-between flex-shrink-0 ${isDark ? 'border-slate-800' : 'border-slate-200'}`}>
             <div className="flex items-center gap-2">
-              <Sliders className="w-4 h-4 text-cyan-500" />
-              <span className="text-xs font-bold tracking-widest uppercase">Scientific Controls</span>
+              <Sliders className="w-4 h-4 text-cyan-400" />
+              <span className="text-xs font-bold tracking-widest uppercase font-mono text-cyan-400">Scientific Controls</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-500 border border-cyan-500/30 font-bold">
-                4D INCOIS OGCM
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-500 border border-cyan-500/30 font-bold font-mono">
+                INCOIS 4D
               </span>
-              {isFullscreen && (
-                <button
-                  onClick={() => setShowControlsDrawer(false)}
-                  className={`p-1 rounded-lg border text-xs ${btnIdle}`}
-                  title="Close Controls Drawer"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
+              <button
+                onClick={() => setShowControlsDrawer(false)}
+                className={`p-1.5 rounded-lg border text-xs ${btnIdle} cursor-pointer hover:border-cyan-400`}
+                title="Close Controls Panel"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
           </div>
 
-        <div className="flex-1 overflow-y-auto p-3 space-y-3">
+          <div className="flex-1 overflow-y-auto p-3 space-y-3">
+            {/* ── 0. Quick Scientific Actions (Auto-Contrast, Snapshot, CSV Export) ── */}
+            <div className={`p-2.5 rounded-xl border space-y-2 ${panelCard}`}>
+              <p className="text-[11px] font-bold text-cyan-500 uppercase tracking-wider">Quick Actions & Export</p>
+              <div className="grid grid-cols-3 gap-1.5 font-mono text-xs">
+                <button
+                  onClick={() => setAutoContrast(!autoContrast)}
+                  title="Toggle Contrast Normalization"
+                  className={`py-2 px-1 text-center rounded-lg border flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
+                    autoContrast ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50 font-bold' : btnIdle
+                  }`}
+                >
+                  <Contrast className="w-3.5 h-3.5" />
+                  <span className="text-[10px]">{autoContrast ? 'Auto Scale' : 'Manual'}</span>
+                </button>
+
+                <button
+                  onClick={handleExportSnapshot}
+                  title="Capture PNG High-Res Snapshot"
+                  className={`py-2 px-1 text-center rounded-lg border flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${btnIdle}`}
+                >
+                  <Camera className="w-3.5 h-3.5 text-cyan-400" />
+                  <span className="text-[10px]">Snapshot</span>
+                </button>
+
+                <button
+                  onClick={handleExportCSV}
+                  title="Export Slice Data as CSV"
+                  className={`py-2 px-1 text-center rounded-lg border flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${btnIdle}`}
+                >
+                  <Download className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-[10px]">Export CSV</span>
+                </button>
+              </div>
+            </div>
 
           {/* ── 1. Variable Selector ──────────────────── */}
           <div className={`p-3 rounded-xl border ${panelCard}`}>

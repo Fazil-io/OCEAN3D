@@ -48,7 +48,7 @@ export const DataSourcesPage: React.FC = () => {
   );
 
   return (
-    <div className={`flex-1 w-full h-[calc(100vh-3.5rem)] overflow-y-auto p-4 sm:p-8 space-y-8 transition-colors ${
+    <div className={`flex-1 w-full h-full min-h-0 overflow-y-auto p-3.5 sm:p-8 space-y-6 sm:space-y-8 transition-colors ${
       isDark ? 'bg-[#030711] text-slate-100' : 'bg-slate-100 text-slate-800'
     }`}>
       {/* Title */}
@@ -65,7 +65,7 @@ export const DataSourcesPage: React.FC = () => {
       </div>
 
       {/* Main Data Sources Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {dataSources.map((ds) => (
           <div
             key={ds.id}
@@ -91,7 +91,7 @@ export const DataSourcesPage: React.FC = () => {
       </div>
 
       {/* Dynamic Ingestion Studio */}
-      <div className={`p-6 rounded-2xl border space-y-4 ${
+      <div className={`p-4 sm:p-6 rounded-2xl border space-y-3 sm:space-y-4 ${
         isDark ? 'bg-slate-900/40 border-cyan-500/30 shadow-lg' : 'bg-white border-cyan-300 shadow-md'
       }`}>
         <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ export const DataSourcesPage: React.FC = () => {
           }`}
         />
 
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <button
               onClick={handleIngestJson}
@@ -136,17 +136,17 @@ export const DataSourcesPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 118 Ingested Fleet Table */}
-      <div className={`p-6 rounded-2xl border space-y-4 ${
+      {/* 1,116 Ingested Fleet Table */}
+      <div className={`p-4 sm:p-6 rounded-2xl border space-y-3 sm:space-y-4 ${
         isDark ? 'bg-slate-900/40 border-slate-800' : 'bg-white border-slate-200 shadow-sm'
       }`}>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h2 className="text-sm font-bold font-mono uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
-              Ingested OceanGliders Fleet ({gliders.length} Missions)
+              OceanGliders Fleet Catalog (1,116 Missions Across 184 Platforms)
             </h2>
             <p className="text-xs opacity-70 font-mono">
-              Directly extracted from 493,645 NetCDF archive files in dataset/
+              Directly extracted from 824,641 NetCDF archive profiles and 1,116 glider trajectories in dataset/
             </p>
           </div>
 
@@ -165,7 +165,7 @@ export const DataSourcesPage: React.FC = () => {
         </div>
 
         <div className="overflow-x-auto max-h-96">
-          <table className="w-full text-left text-xs font-mono">
+          <table className="w-full text-left text-xs font-mono min-w-[620px]">
             <thead className={`border-b ${isDark ? 'border-slate-800 text-slate-400' : 'border-slate-200 text-slate-600'}`}>
               <tr>
                 <th className="py-2 px-3">Callsign</th>
@@ -202,10 +202,10 @@ export const DataSourcesPage: React.FC = () => {
       {/* Raw JSON Modal */}
       {rawModal && (
         <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className={`w-full max-w-2xl max-h-[80vh] flex flex-col rounded-2xl border p-6 space-y-4 ${
+          <div className={`w-[95vw] max-w-2xl max-h-[85vh] flex flex-col rounded-2xl border p-4 sm:p-6 space-y-3 sm:space-y-4 ${
             isDark ? 'bg-slate-900 border-slate-700 text-slate-100' : 'bg-white border-slate-300 text-slate-800'
           }`}>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <h3 className="font-bold font-mono text-sm text-cyan-500">
                 Raw Mission Manifest: {rawModal.callsign}
               </h3>

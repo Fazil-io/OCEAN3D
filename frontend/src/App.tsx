@@ -56,7 +56,7 @@ const MainApp: React.FC = () => {
   };
 
   return (
-    <div className={`h-screen flex flex-col font-serif transition-colors duration-200 overflow-hidden ${
+    <div className={`min-h-screen h-[100dvh] max-h-[100dvh] flex flex-col font-serif transition-colors duration-200 overflow-hidden ${
       theme === 'dark' ? 'bg-[#030711] text-slate-100' : 'bg-slate-50 text-slate-900'
     }`}>
       <Navbar
@@ -69,7 +69,7 @@ const MainApp: React.FC = () => {
         onToggleFullscreen={handleToggleFullscreen}
       />
 
-      <main className="flex-1 overflow-hidden flex flex-col">
+      <main className="flex-1 overflow-hidden flex flex-col min-h-0 relative">
         {activeTab === 'landing' && (
           <LandingPage
             onLaunchExplorer={() => {

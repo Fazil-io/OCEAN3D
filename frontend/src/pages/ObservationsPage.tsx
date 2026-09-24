@@ -237,7 +237,7 @@ export const ObservationsPage: React.FC<ObservationsPageProps> = ({ onSelectAndE
       isDark ? "bg-[#030711] text-slate-100" : "bg-slate-50 text-slate-900"
     }`}>
       {/* 1. TOP HEADER & METRICS BAR */}
-      <div className={`px-4 sm:px-8 py-3.5 border-b flex flex-wrap items-center justify-between gap-4 transition-colors ${
+      <div className={`px-3 sm:px-8 py-2 sm:py-3.5 border-b flex flex-wrap items-center justify-between gap-3 sm:gap-4 transition-colors ${
         isDark ? "bg-[#070f22]/80 border-cyan-500/20" : "bg-white border-slate-200 shadow-xs"
       }`}>
         <div className="flex items-center gap-3">
@@ -281,7 +281,7 @@ export const ObservationsPage: React.FC<ObservationsPageProps> = ({ onSelectAndE
               }`}
             >
               <TableIcon className="w-3.5 h-3.5" />
-              <span>Data Table ({filteredData.length})</span>
+              <span className="hidden sm:inline">Data Table ({filteredData.length})</span><span className="sm:hidden">Table ({filteredData.length})</span>
             </button>
 
             <button
@@ -297,7 +297,7 @@ export const ObservationsPage: React.FC<ObservationsPageProps> = ({ onSelectAndE
               }`}
             >
               <Box className="w-3.5 h-3.5" />
-              <span>3D Models (Argo, Buoy & Glider)</span>
+              <span className="hidden sm:inline">3D Models (Argo, Buoy, Glider)</span><span className="sm:hidden">3D Twins</span>
             </button>
 
             <button
@@ -313,7 +313,7 @@ export const ObservationsPage: React.FC<ObservationsPageProps> = ({ onSelectAndE
               }`}
             >
               <BarChart3 className="w-3.5 h-3.5" />
-              <span>Depth Curve Analysis</span>
+              <span className="hidden sm:inline">Depth Curve Analysis</span><span className="sm:hidden">Curves</span>
             </button>
           </div>
 
@@ -333,7 +333,7 @@ export const ObservationsPage: React.FC<ObservationsPageProps> = ({ onSelectAndE
       </div>
 
       {/* 2. STATS SUMMARY STRIP */}
-      <div className={`px-4 sm:px-8 py-2.5 border-b grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono transition-colors ${
+      <div className={`px-3 sm:px-8 py-2 sm:py-2.5 border-b grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 text-[11px] sm:text-xs font-mono transition-colors ${
         isDark ? "bg-[#050c1b]/60 border-white/[0.06] text-slate-300" : "bg-slate-100/70 border-slate-200 text-slate-700"
       }`}>
         <div className="flex items-center gap-2">
@@ -368,10 +368,10 @@ export const ObservationsPage: React.FC<ObservationsPageProps> = ({ onSelectAndE
 
       {/* 3. SEARCH & FILTER CONTROLS */}
       {viewMode !== "models" && (
-      <div className={`px-4 sm:px-8 py-3 border-b flex flex-wrap items-center justify-between gap-3 transition-colors ${
+      <div className={`px-3 sm:px-8 py-2 sm:py-3 border-b flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 transition-colors ${
         isDark ? "bg-[#030711] border-white/[0.08]" : "bg-white border-slate-200"
       }`}>
-        <div className="flex flex-wrap items-center gap-2.5 flex-1 min-w-[280px]">
+        <div className="flex flex-wrap items-center gap-2 flex-1 min-w-0 w-full">
           {/* Search box */}
           <div className="relative flex-1 max-w-sm">
             <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
@@ -442,7 +442,7 @@ export const ObservationsPage: React.FC<ObservationsPageProps> = ({ onSelectAndE
         /* ================= DATA TABLE VIEW ================= */
         <div className="flex-1 flex flex-col overflow-hidden">
           <div className="flex-1 overflow-auto">
-            <table className="w-full text-left text-xs border-collapse">
+            <table className="w-full text-left text-xs border-collapse min-w-[760px]">
               <thead className={`sticky top-0 z-10 border-b font-mono uppercase text-[11px] tracking-wider transition-colors ${
                 isDark ? "bg-[#070f22] text-slate-300 border-cyan-500/20" : "bg-slate-100 text-slate-700 border-slate-300"
               }`}>
@@ -632,7 +632,7 @@ export const ObservationsPage: React.FC<ObservationsPageProps> = ({ onSelectAndE
           </div>
 
           {/* Table Pagination Bar */}
-          <div className={`px-4 sm:px-8 py-2.5 border-t flex flex-wrap items-center justify-between gap-3 text-xs font-mono transition-colors ${
+          <div className={`px-3 sm:px-8 py-2 sm:py-2.5 border-t flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs font-mono transition-colors ${
             isDark ? "bg-[#070f22] border-white/[0.08] text-slate-400" : "bg-slate-100 border-slate-200 text-slate-600"
           }`}>
             <div className="flex items-center gap-2">
@@ -699,7 +699,7 @@ export const ObservationsPage: React.FC<ObservationsPageProps> = ({ onSelectAndE
         /* ================= DUAL DEPTH ANALYSIS VIEW ================= */
         <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
           {/* Left Selection List */}
-          <div className={`w-full lg:w-96 border-r flex flex-col h-full transition-colors ${
+          <div className={`w-full lg:w-96 border-b lg:border-b-0 lg:border-r max-h-[32vh] lg:max-h-full flex flex-col flex-shrink-0 transition-colors ${
             isDark ? "bg-[#050c1b]/40 border-cyan-500/20" : "bg-white border-slate-200"
           }`}>
             <div className="p-3 border-b border-white/[0.08] flex items-center justify-between">

@@ -13,11 +13,14 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
     try {
+      const isManual = localStorage.getItem('ocean3d_theme_user_selected');
       const saved = localStorage.getItem('ocean3d_theme');
-      if (saved === 'dark' || saved === 'light') return saved;
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      if (isManual === 'true' && (saved === 'dark' || saved === 'light')) {
+        return saved;
+      }
+      return 'light';
     } catch (e) {
-      return 'dark';
+      return 'light';
     }
   });
 
@@ -36,10 +39,21 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [theme]);
 
   const toggleTheme = () => {
-    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    setThemeState((prev) => {
+      const next = prev === 'dark' ? 'light' : 'dark';
+      try {
+        localStorage.setItem('ocean3d_theme_user_selected', 'true');
+        localStorage.setItem('ocean3d_theme', next);
+      } catch (e) {}
+      return next;
+    });
   };
 
   const setTheme = (t: Theme) => {
+    try {
+      localStorage.setItem('ocean3d_theme_user_selected', 'true');
+      localStorage.setItem('ocean3d_theme', t);
+    } catch (e) {}
     setThemeState(t);
   };
 

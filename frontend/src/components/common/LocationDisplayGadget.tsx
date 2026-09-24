@@ -177,11 +177,13 @@ export function analyzeLocation(lat: number, lon: number): LocationAnalysis {
 interface LocationDisplayGadgetProps {
   onTargetIn3D?: (lat: number, lon: number, name: string) => void;
   isDark?: boolean;
+  children?: React.ReactNode;
 }
 
 export const LocationDisplayGadget: React.FC<LocationDisplayGadgetProps> = ({
   onTargetIn3D,
-  isDark = true
+  isDark = true,
+  children
 }) => {
   // Preset dataset locations from IN_SITU_DATASET
   const datasetOptions = useMemo(() => {
@@ -235,7 +237,7 @@ export const LocationDisplayGadget: React.FC<LocationDisplayGadgetProps> = ({
   return (
     <aside
       aria-label="Location telemetry instrument"
-      className="absolute top-14 left-3 z-30 transition-all duration-200 select-none"
+      className="absolute top-13 sm:top-14 left-2.5 sm:left-3 z-30 transition-all duration-200 select-none flex flex-col items-start gap-2"
     >
       {/* ── COLLAPSED STATE: Sleek, compact pill (Not fully visible until clicked) ── */}
       {!isExpanded ? (
@@ -268,7 +270,7 @@ export const LocationDisplayGadget: React.FC<LocationDisplayGadgetProps> = ({
         </button>
       ) : (
         /* ── ENLARGED STATE: Full Digital Marine Avionics Telemetry Display ── */
-        <div className="max-w-sm w-[92vw] sm:w-[380px] animate-in fade-in zoom-in-95 duration-150">
+        <div className="max-w-sm w-[92vw] sm:w-[380px] max-h-[80vh] flex flex-col animate-in fade-in zoom-in-95 duration-150">
           {/* Top Control Bar with Location Selector & Collapse Button */}
           <div className={`p-1.5 rounded-xl border backdrop-blur-md shadow-lg flex items-center justify-between gap-2 mb-2 ${
             isDark
@@ -462,6 +464,9 @@ export const LocationDisplayGadget: React.FC<LocationDisplayGadgetProps> = ({
           </div>
         </div>
       )}
+
+      {/* Content positioned directly below location option */}
+      {children}
     </aside>
   );
 };

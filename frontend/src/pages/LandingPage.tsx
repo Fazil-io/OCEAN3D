@@ -26,7 +26,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   const isDark = theme === 'dark';
 
   return (
-    <div className={`flex-1 w-full h-[calc(100vh-3.5rem)] overflow-y-auto flex flex-col justify-between p-6 sm:p-12 transition-colors ${
+    <div className={`flex-1 w-full h-full min-h-0 overflow-y-auto flex flex-col justify-between p-4 sm:p-8 md:p-12 transition-colors ${
       isDark ? 'bg-[#030711] text-slate-100' : 'bg-slate-50 text-slate-800'
     }`}>
       {/* Hero Section */}
@@ -36,7 +36,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <span>Smart India Hackathon 2026 • Problem Statement SIH26067</span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl font-black font-sans tracking-tight leading-tight">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-black font-sans tracking-tight leading-tight">
           Next-Gen 3D Oceanographic Data Visualization & Integration Platform
         </h1>
 
@@ -48,7 +48,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
           <button
             onClick={onLaunchExplorer}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-500 text-white font-bold font-mono text-sm flex items-center gap-2 hover:scale-105 transition-all shadow-lg shadow-cyan-500/25"
+            className="w-full sm:w-auto justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-500 text-white font-bold font-mono text-sm flex items-center gap-2 hover:scale-105 transition-all shadow-lg shadow-cyan-500/25 cursor-pointer"
           >
             <Waves className="w-4 h-4" />
             <span>Launch 3D Explorer</span>
@@ -57,7 +57,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
           <button
             onClick={onExploreData}
-            className={`px-6 py-3 rounded-xl border font-bold font-mono text-sm flex items-center gap-2 transition-all ${
+            className={`w-full sm:w-auto justify-center px-6 py-3 rounded-xl border font-bold font-mono text-sm flex items-center gap-2 transition-all cursor-pointer ${
               isDark
                 ? 'bg-slate-900 border-slate-700 text-slate-200 hover:bg-slate-800'
                 : 'bg-white border-slate-300 text-slate-800 hover:bg-slate-100 shadow-sm'
@@ -70,7 +70,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </div>
 
       {/* 3 Pillar Features */}
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 pb-8">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pt-8 sm:pt-12 pb-6 sm:pb-8">
         <div className={`p-6 rounded-2xl border space-y-2 ${
           isDark ? 'bg-slate-900/50 border-slate-800' : 'bg-white border-slate-200 shadow-sm'
         }`}>
@@ -89,9 +89,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-2">
             <Activity className="w-5 h-5" />
           </div>
-          <h3 className="font-bold text-sm font-mono">118 Gliders & Argo In-Situ</h3>
+          <h3 className="font-bold text-sm font-mono">1,116 Gliders & Argo In-Situ</h3>
           <p className="text-xs opacity-75 leading-relaxed">
-            Directly parses 493,000+ NetCDF archive files and EGO deployment manifests with full 3D sawtooth trajectory ribbons.
+            Directly parses 824,641+ NetCDF archive profiles and 1,116 glider missions across 184 platforms in dataset/ with full 3D sawtooth trajectory ribbons.
           </p>
         </div>
 
