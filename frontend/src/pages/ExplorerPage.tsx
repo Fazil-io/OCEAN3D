@@ -102,8 +102,9 @@ export const ExplorerPage: React.FC<ExplorerPageProps> = ({
   const [showGliders,   setShowGliders]   = useState<boolean>(true);
   const [showTrajectories, setShowTrajectories] = useState<boolean>(true);
   const [showBathymetry,   setShowBathymetry]   = useState<boolean>(true);
-  const [showGrid,      setShowGrid]      = useState<boolean>(true);
-  const [customMin,     setCustomMin]     = useState<number | undefined>(undefined);
+  const [showGrid,         setShowGrid]         = useState<boolean>(true);
+  const [showSeawater,     setShowSeawater]     = useState<boolean>(true);
+  const [customMin,        setCustomMin]        = useState<number | undefined>(undefined);
   const [customMax,     setCustomMax]     = useState<number | undefined>(undefined);
   const [metadata,      setMetadata]      = useState<DatasetMetadata | null>(null);
   const [sliceData,     setSliceData]     = useState<OceanSlice | null>(null);
@@ -253,6 +254,7 @@ export const ExplorerPage: React.FC<ExplorerPageProps> = ({
           showTrajectories={showTrajectories}
           showBathymetry={showBathymetry}
           showGrid={showGrid}
+          showSeawater={showSeawater}
           cameraPreset={cameraPreset}
           canvasRef={canvasRef}
           lowBandwidth={lowBandwidth}
@@ -527,11 +529,12 @@ export const ExplorerPage: React.FC<ExplorerPageProps> = ({
             <p className="text-[11px] font-bold text-cyan-500 uppercase tracking-wider mb-1">Layer Visibility</p>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { label: 'Argo Floats', state: showArgo,         setState: setShowArgo },
-                { label: 'Gliders',     state: showGliders,      setState: setShowGliders },
-                { label: 'Trajectories',state: showTrajectories, setState: setShowTrajectories },
-                { label: 'Bathymetry',  state: showBathymetry,   setState: setShowBathymetry },
-                { label: 'Grid Floor',  state: showGrid,         setState: setShowGrid }
+                { label: 'Seawater Layer', state: showSeawater,    setState: setShowSeawater },
+                { label: 'Argo Floats',    state: showArgo,        setState: setShowArgo },
+                { label: 'Gliders',        state: showGliders,     setState: setShowGliders },
+                { label: 'Trajectories',   state: showTrajectories,setState: setShowTrajectories },
+                { label: 'Bathymetry',     state: showBathymetry,  setState: setShowBathymetry },
+                { label: 'Grid Floor',     state: showGrid,        setState: setShowGrid }
               ].map(({ label, state, setState }) => (
                 <label key={label} className="flex items-center gap-2 cursor-pointer text-xs font-semibold">
                   <input

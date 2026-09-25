@@ -6,6 +6,7 @@ import { SliceLayer } from './SliceLayer';
 import { VolumeLayer } from './VolumeLayer';
 import { CurrentsLayer } from './CurrentsLayer';
 import { ObservationMarkers } from './ObservationMarkers';
+import { SeawaterLayer } from './SeawaterLayer';
 import {
   OceanSlice,
   OceanVolume,
@@ -35,6 +36,7 @@ interface OceanSceneProps {
   showTrajectories: boolean;
   showBathymetry: boolean;
   showGrid: boolean;
+  showSeawater?: boolean;
   cameraPreset?: CameraPreset;
   canvasRef?: React.MutableRefObject<HTMLCanvasElement | null>;
   lowBandwidth?: boolean;
@@ -174,6 +176,7 @@ export const OceanScene: React.FC<OceanSceneProps> = ({
   showTrajectories,
   showBathymetry,
   showGrid,
+  showSeawater = true,
   cameraPreset,
   canvasRef,
   lowBandwidth = false
@@ -205,6 +208,11 @@ export const OceanScene: React.FC<OceanSceneProps> = ({
           showGrid={showGrid}
           showBathymetry={showBathymetry}
         />
+
+        {/* Surrounding Seawater Layer connected to main model perimeter */}
+        {showSeawater && (
+          <SeawaterLayer lowBandwidth={lowBandwidth} />
+        )}
 
         {/* 1. Depth Slice Plane */}
         {visMode === 'slice' && sliceData && (
