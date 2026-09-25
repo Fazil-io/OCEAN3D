@@ -170,18 +170,9 @@ export const SeawaterLayer: React.FC<SeawaterLayerProps> = ({
         // Add fresnel sky shine
         finalColor += (uIsDark > 0.5 ? vec3(0.0, 0.4, 0.8) : vec3(0.4, 0.7, 1.0)) * fresnel * 0.4;
 
-        // Opacity calibration:
-        // Inside model: translucent (0.38 - 0.52) so 3D temperature/salinity slices,
-        // volume voxels, and Argo floats remain clearly visible below the surface!
-        // Outside model: deeper opacity (0.72) with smooth horizon distance falloff.
-        float alpha;
-        if (isInsideModel) {
-          alpha = (uIsDark > 0.5 ? 0.42 : 0.35) + fresnel * 0.25 + totalFoam * 0.35;
-        } else {
-          float distFromCenter = length(vWorldPosition.xz);
-          float horizonFade = smoothstep(58.0, 42.0, distFromCenter);
-          alpha = clamp(horizonFade * (uIsDark > 0.5 ? 0.75 : 0.68) + totalFoam * 0.2, 0.15, 0.85);
-        }
+        float distFromCenter = length(vWorldPosition.xz);
+        float horizonFade = smoothstep(58.0, 42.0, distFromCenter);
+        float alpha = clamp(horizonFade * (uIsDark > 0.5 ? 0.75 : 0.68) + totalFoam * 0.25, 0.2, 0.88);
 
         gl_FragColor = vec4(finalColor, alpha);
       }
@@ -213,7 +204,6 @@ export const SeawaterLayer: React.FC<SeawaterLayerProps> = ({
   const fullWidth = outerR * 2;       // 116.0
   const centerOffset = innerR + stripDepth / 2; // 35.5
 
-  const modelSegments = lowBandwidth ? 36 : 64;
   const stripSegX = lowBandwidth ? 24 : 44;
   const stripSegZ = lowBandwidth ? 14 : 24;
 
@@ -235,20 +225,8 @@ export const SeawaterLayer: React.FC<SeawaterLayerProps> = ({
   return (
     <group name="real-waves-ocean-system">
       {/* ═══════════════════════════════════════════════════════════════════
-          1. MODEL SEA SURFACE (Real Gerstner Waves Across Regional Domain)
-          Seamlessly undulating across [-13, 13] x [-13, 13]
-         ═══════════════════════════════════════════════════════════════════ */}
-      <mesh
-        position={[0, surfaceY, 0]}
-        rotation={[-Math.PI / 2, 0, 0]}
-        material={shaderData.material}
-      >
-        <planeGeometry args={[innerR * 2, innerR * 2, modelSegments, modelSegments]} />
-      </mesh>
-
-      {/* ═══════════════════════════════════════════════════════════════════
-          2. SURROUNDING CONTINUOUS SEAWATER LAYER
-          Connecting seamlessly to the model with identical wave equations
+          SURROUNDING REAL GERSTNER OCEAN WAVES
+          Connected directly to the 4 borders of the model (no water upon model)
          ═══════════════════════════════════════════════════════════════════ */}
       {showSurrounding && (
         <>
