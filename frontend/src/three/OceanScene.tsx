@@ -132,18 +132,6 @@ const SceneController: React.FC<{
         East (94°E)
       </Text>
 
-      {/* Depth Water Surface */}
-      <mesh position={[0, 8.0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[26, 26]} />
-        <meshStandardMaterial
-          color={isDark ? '#003366' : '#0284c7'}
-          transparent
-          opacity={isDark ? 0.2 : 0.15}
-          roughness={0.1}
-          metalness={0.4}
-        />
-      </mesh>
-
       {/* Bathymetry Seabed */}
       {showBathymetry && (
         <mesh position={[0, -8.0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -209,10 +197,8 @@ export const OceanScene: React.FC<OceanSceneProps> = ({
           showBathymetry={showBathymetry}
         />
 
-        {/* Surrounding Seawater Layer connected to main model perimeter */}
-        {showSeawater && (
-          <SeawaterLayer lowBandwidth={lowBandwidth} />
-        )}
+        {/* Real Gerstner Ocean Wave System (Covering Model Domain & Surrounding Ocean) */}
+        <SeawaterLayer lowBandwidth={lowBandwidth} showSurrounding={showSeawater} />
 
         {/* 1. Depth Slice Plane */}
         {visMode === 'slice' && sliceData && (
