@@ -274,54 +274,55 @@ export const ExplorerPage: React.FC<ExplorerPageProps> = ({
           ))}
         </div>
 
-        {/* ── Location Option with Controls & Full Screen below it ── */}
+        {/* ── Location Option ── */}
         <LocationDisplayGadget
           isDark={isDark}
           onTargetIn3D={handleTargetLocation}
-        >
-          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-1">
-            {/* Scientific Controls Toggle Option */}
+        />
+
+        {/* ── Top-Right: Scientific Controls & Full Screen (Top-Right Corner of Playground) ── */}
+        <div className="absolute top-2.5 sm:top-3 right-2 sm:right-3 z-20 flex items-center gap-1.5 sm:gap-2">
+          {/* Scientific Controls Toggle Button */}
+          <button
+            onClick={() => setShowControlsDrawer((prev) => !prev)}
+            title={showControlsDrawer ? "Hide Scientific Controls" : "Show Scientific Controls"}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono font-bold backdrop-blur-md transition-all shadow-md cursor-pointer ${
+              showControlsDrawer
+                ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-cyan-500/30 font-extrabold'
+                : isDark
+                ? 'bg-[#030914]/90 border-cyan-500/40 text-cyan-300 hover:border-cyan-300 hover:bg-[#071329]'
+                : 'bg-white/95 border-sky-300 text-sky-700 hover:border-sky-500 hover:bg-slate-50'
+            }`}
+          >
+            <Sliders className="w-3.5 h-3.5 text-cyan-400" />
+            <span>{showControlsDrawer ? 'Close Controls' : 'Scientific Controls'}</span>
+          </button>
+
+          {/* Full Screen Option */}
+          {onToggleFullscreen && (
             <button
-              onClick={() => setShowControlsDrawer((prev) => !prev)}
-              title={showControlsDrawer ? "Hide Scientific Controls" : "Show Scientific Controls"}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono font-bold backdrop-blur-md transition-all shadow-md cursor-pointer ${
-                showControlsDrawer
-                  ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-cyan-500/30 font-extrabold'
-                  : isDark
-                  ? 'bg-[#030914]/90 border-cyan-500/40 text-cyan-300 hover:border-cyan-300 hover:bg-[#071329]'
-                  : 'bg-white/95 border-sky-300 text-sky-700 hover:border-sky-500 hover:bg-slate-50'
+              onClick={onToggleFullscreen}
+              title={isFullscreen ? "Exit Fullscreen" : "Full Screen 3D Visualization"}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono font-semibold backdrop-blur-md transition-all shadow-md cursor-pointer ${
+                isDark
+                  ? 'bg-slate-950/85 border-slate-800 text-slate-200 hover:text-white hover:bg-slate-800'
+                  : 'bg-white/95 border-slate-300 text-slate-800 hover:bg-slate-100 shadow-sm'
               }`}
             >
-              <Sliders className="w-3.5 h-3.5 text-cyan-400" />
-              <span>{showControlsDrawer ? 'Close Controls' : 'Scientific Controls'}</span>
+              {isFullscreen ? (
+                <>
+                  <Minimize2 className="w-3.5 h-3.5 text-cyan-400" />
+                  <span className="hidden sm:inline">Exit Fullscreen</span>
+                </>
+              ) : (
+                <>
+                  <Maximize2 className="w-3.5 h-3.5 text-cyan-500" />
+                  <span className="hidden sm:inline">Full Screen</span>
+                </>
+              )}
             </button>
-
-            {/* Full Screen Option */}
-            {onToggleFullscreen && (
-              <button
-                onClick={onToggleFullscreen}
-                title={isFullscreen ? "Exit Fullscreen" : "Full Screen 3D Visualization"}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono font-semibold backdrop-blur-md transition-all shadow-md cursor-pointer ${
-                  isDark
-                    ? 'bg-slate-950/85 border-slate-800 text-slate-200 hover:text-white hover:bg-slate-800'
-                    : 'bg-white/95 border-slate-300 text-slate-800 hover:bg-slate-100 shadow-sm'
-                }`}
-              >
-                {isFullscreen ? (
-                  <>
-                    <Minimize2 className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>Exit Fullscreen</span>
-                  </>
-                ) : (
-                  <>
-                    <Maximize2 className="w-3.5 h-3.5 text-cyan-500" />
-                    <span>Full Screen</span>
-                  </>
-                )}
-              </button>
-            )}
-          </div>
-        </LocationDisplayGadget>
+          )}
+        </div>
 
         {/* ── Bottom-Left: Colorbar (Compact on mobile) ── */}
         <div className="absolute bottom-14 sm:bottom-16 left-2 sm:left-4 z-10 w-36 sm:w-56 md:w-64 max-w-[45vw]">
