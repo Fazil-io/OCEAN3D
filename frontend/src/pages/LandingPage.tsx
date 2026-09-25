@@ -109,7 +109,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </div>
 
       {/* Footer Branding */}
-      <div className="text-center text-[11px] font-mono opacity-60 pt-4 border-t border-slate-800/40 dark:border-slate-800">
+      <div className="text-center text-[11px] font-mono opacity-60 pt-4 border-t border-slate-200 dark:border-slate-800">
         Engineered by Team CodeHydra • Smart India Hackathon 2026
       </div>
     </div>

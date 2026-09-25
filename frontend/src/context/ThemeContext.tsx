@@ -13,10 +13,14 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
     try {
-      const isManual = localStorage.getItem('ocean3d_theme_user_selected');
-      const saved = localStorage.getItem('ocean3d_theme');
-      if (isManual === 'true' && (saved === 'dark' || saved === 'light')) {
-        return saved;
+      // Clean up legacy persistent localStorage keys so users/evaluators are never stuck in dark mode
+      localStorage.removeItem('ocean3d_theme_user_selected');
+      localStorage.removeItem('ocean3d_theme');
+
+      // Only check active tab/session storage if the user explicitly switched theme during current session
+      const sessionTheme = sessionStorage.getItem('ocean3d_session_theme');
+      if (sessionTheme === 'dark' || sessionTheme === 'light') {
+        return sessionTheme;
       }
       return 'light';
     } catch (e) {
@@ -25,9 +29,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   });
 
   useEffect(() => {
-    try {
-      localStorage.setItem('ocean3d_theme', theme);
-    } catch (e) {}
     const root = document.documentElement;
     if (theme === 'light') {
       root.classList.add('light');
@@ -42,8 +43,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setThemeState((prev) => {
       const next = prev === 'dark' ? 'light' : 'dark';
       try {
-        localStorage.setItem('ocean3d_theme_user_selected', 'true');
-        localStorage.setItem('ocean3d_theme', next);
+        sessionStorage.setItem('ocean3d_session_theme', next);
       } catch (e) {}
       return next;
     });
@@ -51,8 +51,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const setTheme = (t: Theme) => {
     try {
-      localStorage.setItem('ocean3d_theme_user_selected', 'true');
-      localStorage.setItem('ocean3d_theme', t);
+      sessionStorage.setItem('ocean3d_session_theme', t);
     } catch (e) {}
     setThemeState(t);
   };
